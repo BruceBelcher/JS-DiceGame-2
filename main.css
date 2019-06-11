@@ -12,7 +12,7 @@ body {
     margin-right: auto;
     margin-top: auto;
     /* position: relative; */
-    background-color: red;
+    background-color: whitesmoke;
     align-items: center;
     /* justify-items: center; */
 }
@@ -24,6 +24,15 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+#playerContainer {
+    display: flex;
+    width: 75vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(66, 64, 64);
+    /* width: 20vh;
+    padding: 2vh; */
+}
 #scoreBox {
     display: flex;
     margin-left: auto;
@@ -31,5 +40,22 @@ body {
     background-color: blueviolet;
     width: 20vh;
     padding: 2vh;
-
+}
+#player1 {
+    display: flex;
+    /* margin-left: auto;
+    margin-right: auto; */
+    justify-content: center;
+    background-color: green;
+    width: 20vh;
+    padding: 2vh;
+}
+#player2 {
+    display: flex;
+    /* margin-left: auto;
+    margin-right: auto; */
+    justify-content: center;
+    background-color: green;
+    width: 20vh;
+    padding: 2vh;
 }
