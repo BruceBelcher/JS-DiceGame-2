@@ -4,58 +4,59 @@ body {
     padding: 0;
     margin: 0;
 }
-#diceContainer {
+/* #diceContainer {
     height: 75vh;
     width: 75vh;
     display: flex;
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
-    /* position: relative; */
+    position: relative;
     background-color: whitesmoke;
     align-items: center;
-    /* justify-items: center; */
-}
+    justify-items: center;
+}*/
 
-#diceFace {
+
+/* #diceFace { */
     /* width: 50%;
     height: 50%; */
-    display: flex;
+    /* display: flex;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
 }
-#playerContainer {
-    display: flex;
+/* #playerContainer { */
+    /* display: flex;
     width: 75vh;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(66, 64, 64);
+    background-color: rgb(66, 64, 64); */
     /* width: 20vh;
     padding: 2vh; */
 }
-#scoreBox {
-    display: flex;
+/* #scoreBox { */
+    /* display: flex;
     margin-left: auto;
     margin-right: auto;
     background-color: blueviolet;
     width: 20vh;
-    padding: 2vh;
-}
-#player1 {
-    display: flex;
+    padding: 2vh; 
+}*/
+/* #player1 { */
+    /* display: flex; */
     /* margin-left: auto;
     margin-right: auto; */
-    justify-content: center;
+    /* justify-content: center;
     background-color: green;
     width: 20vh;
     padding: 2vh;
-}
-#player2 {
-    display: flex;
+} */
+/* #player2 {
+    display: flex; */
     /* margin-left: auto;
     margin-right: auto; */
-    justify-content: center;
+    /* justify-content: center;
     background-color: green;
     width: 20vh;
     padding: 2vh;
-}
+} */ 

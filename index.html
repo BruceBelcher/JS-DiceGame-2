@@ -8,28 +8,23 @@
     <link rel="stylesheet" href="./main.css">
 </head>
 <body>
-    <div id="diceContainer">
-        <h1 id="title">Play Dice! <br>  Click on the dice to roll.<br></h1>
-        <img id="diceFace"/>
+    <div id="titles">
+        <h1 id="title"><center>Play Dice!<br>RED player rolls<br>Click on the dice<br></center></h1>
     </div>
-    <div id="playerContainer"> <!-- scorebox ID must match format in JS -->
-        <div id="player1">
-            <h1>Player 1</h1>
-            <div id="scoreBoxplayer1">
-                <p>Score </p>
-            </div>
-            <div id="winLooseplayer1">winloose</div>
+    <div id="diceContainer">
+        <center><img id="diceFace" src="./img/dice1.png"/></center>
+    </div>
+    <div id="playerContainer">
+        <div>
+            <h1 id="player1"><center>Player 1</center></h1>
+            <center><p id="p1score">Score</p></center>
         </div>
-        <div id="player2">
-            <h1>Player 2</h1>
-            <div id="scoreBoxplayer2">
-                <p>Score </p>
-            </div>
-            <div id="winLooseplayer2">winloose</div>
-
+        <div>
+            <h1 id="player2"><center>Player 2</center></h1>
+            <center><p id="p2score">Score</p></center>
         </div>
-        
     </div> <!-- end playerContainer -->
+    <center><button id="startButton" onClick="startGame()">START GAME</button></center>
 
 </body>
 </html>

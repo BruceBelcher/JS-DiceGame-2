@@ -1,46 +1,10 @@
-//logic went off course as didnt quite understamd how eventListener operated
-//tried to make many player version but this overcomplicated it
 
-//set up a player as a class
-class player {
-    constructor (player) {
-        this.result = 0
-        this.score = 0
-        //create unique scoreBox name depending on player ID. Must match HTML ID
-        this.scoreBox = `scoreBox${player}`
-        this.winLoose = `winLoose${player}`
-    }// end constructor
 
-    play =() => {
-        this.result = rollDice()
-        console.log('rolled a ', this.result)
-        if (this.result == 1) {
-            console.log('lost'); 
-            document.getElementById(this.winLoose).innerHTML = "LOST"
-            this.score = 0; this.result = 0   //reset score
-            gameOver=true
-            return     
-        }
-        this.score += this.result
-        if (this.score > 20) {
-            console.log('won')
-            document.getElementById(this.winLoose).innerHTML = "WON"
-            this.score = 0; this.result = 0   //reset score
-            gameOver=true
-            return
-        }
-        //display score to screen
-        console.log (`score = ${this.score}`)
-        document.getElementById(this.scoreBox).innerHTML = this.score
-    } //end play
-    resetScore = () => {
-        this.score = 0; this.result = 0   //reset score
-    }
-}
 
-let rollDice = () => { //roll a dice, return reesult and display dice face
-    const Dice = new Image() //set up an image object for the dice face
-    let diceRoll = ((Math.floor(Math.random() * 6 )) + 1)
+//roll a dice, return reesult and display dice face
+let rollDice = () => { 
+    console.log('rollDice')
+    diceRoll = ((Math.floor(Math.random() * 6 )) + 1)
     //display correct dice face
     switch (diceRoll) {
         case 1: Dice.src="./img/dice1.png"; break
@@ -51,59 +15,97 @@ let rollDice = () => { //roll a dice, return reesult and display dice face
         case 6: Dice.src="./img/dice6.png"; break
         default: console.log('rollDice default error'); break
     }//end switch
-
     //access element diceFace and set up with dice face image
-    let diceFace = document.getElementById("diceFace")
     diceFace.src = Dice.src
     diceFace.appendChild(Dice)
-    return (diceRoll)
 } //end rollDice
 
-let quitGame = () => {
-    let key = event.key
-    console.log(key)
-    if (key == 'q') {
-        diceFace.removeEventListener("click", playGame)
-        document.removeEventListener("keypress", quitGame)
-    }
-} //end quitGame
-
-let playGame = () => {
-    gameOver = false
-    switch (turn) {
+let indicateWhosTurn = (whosTurn) => {
+    switch (whosTurn) {
         case 1: 
-            document.getElementById("player2").style.background = "green";
-            document.getElementById("player1").style.background = "red";
-            p1.play(); turn = 2; 
-            if (gameOver) {
-                p1.resetScore; p2.resetScore
-                // document.getElementById(p1.scoreBox).innerHTML = 'Start'
-                // document.getElementById(p2.scoreBox).innerHTML = 'Start'
-            }
+            player1.style.color = "red"; 
+            player2.style.color = "green"; 
             break;
         case 2: 
-            document.getElementById("player1").style.background = "green";
-            document.getElementById("player2").style.background = "red";
-            p2.play(); turn = 1; 
-            if (gameOver) {
-                p1.resetScore; p2.resetScore
-                // document.getElementById(p1.scoreBox).innerHTML = 'Start'
-                // document.getElementById(p2.scoreBox).innerHTML = 'Start'
-            }
-            break;
+            player2.style.color = "red"; 
+            player1.style.color = "green";
+            break                    
     } //end switch
+} // end indicateWhosTurn
 
-} //end playGame
-
+let playerLost = (whosTurn) => {
+    diceFace.removeEventListener("click", playGame)
+    if (whosTurn == 1) {
+        document.getElementById("p1score").innerHTML = "LOST"
+    } else {
+        document.getElementById("p2score").innerHTML = "LOST"
+    } //end if
+    document.getElementById("startButton").innerHTML = "START GAME"
+    console.log(`${whosTurn} lost`)
+}
+let playerWon = (whosTurn) => {
+    diceFace.removeEventListener("click", playGame)
+    if (whosTurn == 1) {
+        document.getElementById("p1score").innerHTML = "LOST"
+    } else {
+        document.getElementById("p2score").innerHTML = "LOST"
+    } //end if
+    document.getElementById("p2score").innerHTML = "WON"
+    document.getElementById("startButton").innerHTML = "START GAME"
+    console.log(`${whosTurn} won`)
+}
 //MAIN
-let p1 = new player('player1') //names must match format of HTML ID
-let p2 = new player('player2')
-//let gameOver = false //boolean to check if game won or lost. Set in player.
-document.getElementById("diceFace").src = "./img/dice6.png" //initial diceface
-let turn = ((Math.floor(Math.random() * 2 )) + 1) //randomise who starts
-document.getElementById(`player${turn}`).style.background = "red";//player who starts in red
-diceFace.addEventListener("click", playGame)
-document.addEventListener("keypress", quitGame)
+const Dice = new Image() //set up an image object for the dice face
+let diceRoll
+let player1 = document.getElementById("player1")
+let player2 = document.getElementById("player2")
+let p1Score = document.getElementById("p1score")
+let p2Score = document.getElementById("p2Score")
+let diceFace = document.getElementById("diceFace")
+let player1Score = 0
+let player2Score = 0
+let whosTurn = ((Math.floor(Math.random() * 2 )) + 1)   //randomly select player to start
 
+let playGame = () => {
+    console.log ('playgame', whosTurn)
+    rollDice()
+    switch (whosTurn) {
+        case 1: 
+            if (diceRoll == 1) {playerLost(whosTurn); break}
+            player1Score += diceRoll
+            if (player1Score > 20) {playerWon(whosTurn); break}
+            document.getElementById("p1score").innerHTML = player1Score
+            // p1Score.innerHTML = player1Score
+            console.log(`${whosTurn} ${player1Score}`)  
+            whosTurn = 2
+            break
+        case 2:
+            if (diceRoll == 1) {playerLost(whosTurn); break};
+            player2Score += diceRoll
+            if (player2Score > 20) {playerWon(whosTurn); break};
+            document.getElementById("p2score").innerHTML = player2Score
+            // p2Score.innerHTML = player2Score
+            console.log(`${whosTurn} ${player2Score}`)
+            whosTurn = 1
+            break
+    } // end switch
+    indicateWhosTurn(whosTurn)
+} // end playGame
 
+ let startGame = () => {
+    player1Score = 0;document.getElementById("p1score").innerHTML = player1Score
+    player2Score = 0;document.getElementById("p2score").innerHTML = player2Score
+    indicateWhosTurn(whosTurn)
+    console.log ('start')
+
+    if (document.getElementById("startButton").innerHTML == "START GAME") {
+        console.log ('game started')
+        diceFace.addEventListener("click", playGame)
+        document.getElementById("startButton").innerHTML = "STOP GAME"
+     } else {
+        console.log ('game stopped')
+        diceFace.removeEventListener("click", playGame)
+        document.getElementById("startButton").innerHTML = "START GAME"
+     }   
+}
 
